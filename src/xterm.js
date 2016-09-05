@@ -503,7 +503,7 @@ import { Viewport } from './Viewport.js';
      */
     Terminal.prototype.insertRow = function (row) {
       if (typeof row != 'object') {
-        row = document.createElement('div');
+        row = this.document.createElement('div');
       }
 
       this.rowContainer.appendChild(row);
@@ -569,10 +569,10 @@ import { Viewport } from './Viewport.js';
       this.element.style.height
       this.element.setAttribute('tabindex', 0);
 
-      this.viewportElement = document.createElement('div');
+      this.viewportElement = this.document.createElement('div');
       this.viewportElement.classList.add('xterm-viewport');
       this.element.appendChild(this.viewportElement);
-      this.viewportScrollArea = document.createElement('div');
+      this.viewportScrollArea = this.document.createElement('div');
       this.viewportScrollArea.classList.add('xterm-scroll-area');
       this.viewportElement.appendChild(this.viewportScrollArea);
 
@@ -580,7 +580,7 @@ import { Viewport } from './Viewport.js';
       * Create the container that will hold the lines of the terminal and then
       * produce the lines the lines.
       */
-      this.rowContainer = document.createElement('div');
+      this.rowContainer = this.document.createElement('div');
       this.rowContainer.classList.add('xterm-rows');
       this.element.appendChild(this.rowContainer);
       this.children = [];
@@ -589,11 +589,11 @@ import { Viewport } from './Viewport.js';
       * Create the container that will hold helpers like the textarea for
       * capturing DOM Events. Then produce the helpers.
       */
-      this.helperContainer = document.createElement('div');
+      this.helperContainer = this.document.createElement('div');
       this.helperContainer.classList.add('xterm-helpers');
       // TODO: This should probably be inserted once it's filled to prevent an additional layout
       this.element.appendChild(this.helperContainer);
-      this.textarea = document.createElement('textarea');
+      this.textarea = this.document.createElement('textarea');
       this.textarea.classList.add('xterm-helper-textarea');
       this.textarea.setAttribute('autocorrect', 'off');
       this.textarea.setAttribute('autocapitalize', 'off');
@@ -607,12 +607,12 @@ import { Viewport } from './Viewport.js';
       });
       this.helperContainer.appendChild(this.textarea);
 
-      this.compositionView = document.createElement('div');
+      this.compositionView = this.document.createElement('div');
       this.compositionView.classList.add('composition-view');
       this.compositionHelper = new CompositionHelper(this.textarea, this.compositionView, this);
       this.helperContainer.appendChild(this.compositionView);
 
-      this.charMeasureElement = document.createElement('div');
+      this.charMeasureElement = this.document.createElement('div');
       this.charMeasureElement.classList.add('xterm-char-measure-element');
       this.charMeasureElement.innerHTML = 'W';
       this.helperContainer.appendChild(this.charMeasureElement);
